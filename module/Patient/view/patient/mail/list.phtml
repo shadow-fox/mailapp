@@ -1,0 +1,32 @@
+<?php
+
+$value = $this->value;
+$value1 = explode("|", $value[0]);
+/*var_dump($value1);
+var_dump($value);exit;*/
+?>
+
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>To</th>
+            <th>Subject</th>
+            <th>Message</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach($value as $v) {
+            $values = explode("|", $v);
+            //var_dump($values);
+        ?>
+        <tr>
+            <td><?php echo $values[0]; ?></td>
+            <td><?php echo $values[1]; ?></td>
+            <td><?php echo $values[2]; ?></td>
+        </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>

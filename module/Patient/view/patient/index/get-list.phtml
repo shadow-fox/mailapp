@@ -1,0 +1,56 @@
+<?php
+$list = $this->patientList;
+
+$Form = $this->patientForm;
+//var_dump($Form);exit;
+$Form->prepare();
+
+$Form->setAttribute("id","patient-form");
+$Form->setAttribute("autocomplete","on");
+$Form->setAttribute("class","patient-grid");
+
+echo $this->form()->openTag($Form);  ?>
+
+
+<div class="table-responsive">
+    <table class="table table-condensed table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Date of Birth</th>
+            <th>Send Mail</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach($list['items'] as $ls){ ?>
+            <tr>
+                <td><?php
+                    $element = $Form->get("check");
+                    $element->setValueOptions(array($ls['id'] => $ls['id']));
+                    echo $this->formMultiCheckbox()->render($element);
+                    ?>
+                </td>
+                <td name="id"><?php echo $ls['id']; ?></td>
+                <td><?php echo $ls['name']; ?></td>
+                <td><?php echo $ls['mobile']; ?></td>
+                <td name="email"><?php echo $ls['email']; ?></td>
+                <td><?php echo $ls['dob']; ?></td>
+                <td>Send Mail</td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>
+
+
+
+<?php
+$element = $Form->get("submit");
+$element->setAttribute("value","Send Mail");
+
+echo $this->formInput($element);
+echo $this->form()->closeTag();  ?>
+

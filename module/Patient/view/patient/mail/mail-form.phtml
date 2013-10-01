@@ -1,0 +1,33 @@
+<?php
+$list = $this->mailingList;
+//var_dump($list);
+$Form = $this->mailForm;
+//var_dump($Form);exit;
+$Form->prepare();
+
+$Form->setAttribute("id","mail-form");
+$Form->setAttribute("autocomplete","on");
+$Form->setAttribute("class","mail-grid");
+
+echo $this->form()->openTag($Form);  ?>
+
+<?php
+
+$element = $Form->get("to");
+$element->setAttribute("value", $list);
+echo $this->formInput()->render($element);
+?>
+<?php
+$element = $Form->get("subject");
+echo $this->formInput()->render($element);
+?>
+<?php
+$element = $Form->get("body");
+echo $this->formTextarea()->render($element);
+?>
+<?php
+$element = $Form->get("submit");
+$element->setAttribute("value","Send Mail");
+
+echo $this->formInput($element);
+echo $this->form()->closeTag();  ?>
